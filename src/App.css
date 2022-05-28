@@ -36,3 +36,26 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+.homePage {
+  background-image: url("https://www.cityu.edu.hk/bg/sites/g/files/asqsls7361/files/media-image/DaVinci.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: right;
+  height: 100vh;
+  width: 100%;
+}
+
+#summaryDiv {
+  width: 50vw;
+}
+
+#resultDivider {
+  width: 50vw;
+}
+
+.pageHeader {
+  margin-top: 5vh;
+}

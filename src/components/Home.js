@@ -4,8 +4,10 @@ import Response from './Response.js'
 
 function Home() {
   return (
-    <div >
-        <h1>Prep AI</h1>
+    <div className="homePage">
+        <div className="pageHeader">
+          <h1>DAVINCI</h1>
+        </div>
         <Prompt />
         <br/>
         <br/>

@@ -6,42 +6,38 @@ function Prompt() {
   const [summary, setSummary] = useState(``)
 
   const [textData, setTextData] = useState(``)
-
-  const initialFormState = {
-    prompt: "Write a poem about ",
-    temperature: 50
-  }
     
-  function onCreatePoem(summaryResponse) {
+  const showSummary = (summaryResponse) => {
     setSummary(summaryResponse)
   }
 
 // This obviously needs to be changed
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+
+  //   fetch("https://api.openai.com/v1/engines/text-curie-001/completions", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${process.env.REACT_APP_OPENAI_SECRET}`,
+  //     },
+  //     body: JSON.stringify(textData),
+  //   })
+  //   .then(response => response.json())
+  //   .then((poems) => onCreatePoem(poems))
+  //   .then(textData(initialFormState))
+  // }
+
   function handleSubmit(e) {
     e.preventDefault();
-
-    fetch("https://api.openai.com/v1/engines/text-curie-001/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.REACT_APP_OPENAI_SECRET}`,
-      },
-      body: JSON.stringify(textData),
-    })
-    .then(response => response.json())
-    .then((poems) => onCreatePoem(poems))
-    .then(textData(initialFormState))
+    console.log(textData)
+    showSummary(textData)
+    setTextData(``)
   }
 
   function handleChange(e) {
     setTextData(e.target.value);
   }
-
-  const summaryDiv = () => <Response 
-      key= {"summaryResponseDiv"}
-      summary = {summary}
-    />
-  
 
   return (
     <div>
@@ -69,20 +65,17 @@ function Prompt() {
             <button className="ui button center" type="submit">Submit</button>
           </form>
         </div>
-      </div>   
-
-      <p className='divider'></p>
-      <h2> Results </h2>
-      <p className='divider'></p>      
-      <br/>
-
-      <div className="ui one column grid">
-        <div className="ui center aligned ten wide row grid container">
-          {summaryDiv}
-        </div>
-        <br/>
       </div>
 
+      <div className='ui left aligned container resultContainer'>
+        <h2> Results </h2>
+        <p id="resultDivider" className='divider'></p>      
+        <br/>
+        <Response 
+          key= {"summaryResponseDiv"}
+          summary = {summary}
+        />
+      </div>  
     </div>
   )
 }
