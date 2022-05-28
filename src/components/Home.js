@@ -5,7 +5,7 @@ import Response from './Response.js'
 function Home() {
   return (
     <div >
-        <h1>Poem Generator</h1>
+        <h1>Prep AI</h1>
         <Prompt />
         <br/>
         <br/>

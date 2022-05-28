@@ -1,15 +1,13 @@
 import React from 'react'
 
-function Response({prompt, poems}) {
+function Response({summary}) {
   return (
       <div className='center aligned cards'>
         <div className='ui card'>
             <br/>
-            <h4> Prompt </h4>
-            <p> {prompt} </p>
+            <h4> Summary </h4>
             <p className='divider'></p>      
-            <h4>Response </h4>
-            <p> {poems} </p>
+            <p> {summary} </p>
 
             <br/>
         </div>
