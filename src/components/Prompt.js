@@ -2,37 +2,35 @@ import React, { useState }  from 'react'
 import Response from './Response.js'
 
 function Prompt() {
-
   const [summary, setSummary] = useState(``)
-
   const [textData, setTextData] = useState(``)
     
   const showSummary = (summaryResponse) => {
     setSummary(summaryResponse)
   }
 
-// This obviously needs to be changed
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-
-  //   fetch("https://api.openai.com/v1/engines/text-curie-001/completions", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${process.env.REACT_APP_OPENAI_SECRET}`,
-  //     },
-  //     body: JSON.stringify(textData),
-  //   })
-  //   .then(response => response.json())
-  //   .then((poems) => onCreatePoem(poems))
-  //   .then(textData(initialFormState))
-  // }
-
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(textData)
-    showSummary(textData)
-    setTextData(``)
+    const requestBody = JSON.stringify({"textData": textData})
+    console.log(requestBody)
+    fetch("http://127.0.0.1:5000/summarize", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: requestBody,
+    }).then((response) => {
+      if(response.status!==200){
+          console.log(response.statusText);
+      }
+      response.json().then((textResponse) => {
+        console.log(textResponse)
+        showSummary(textResponse)
+        setTextData(``)
+      })
+    }).catch(function(error){
+        console.log(error);
+    });
   }
 
   function handleChange(e) {
